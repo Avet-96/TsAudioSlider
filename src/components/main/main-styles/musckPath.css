@@ -1,0 +1,36 @@
+.path_block {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 90%;
+    border-radius: 6px;
+    padding: 1.5%;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+}
+
+.cosed {
+    display: flex;
+    justify-content: flex-end;
+    color: darkgrey;
+    font-size: 20px;
+}
+
+.input {
+    border: 1px solid darkgray;
+    border-radius: 8px;
+    margin: 15px 0;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+.start_end {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.time_block {
+    border: 1px solid darkgray;
+    margin-left: 6px;
+}
