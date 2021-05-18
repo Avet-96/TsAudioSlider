@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 const SliderBlock = styled.div`
   width: 100%;
-  height: 50px;
-  border: 1px solid darkgray;
+  height: 20px;
+  margin-bottom: 15px;
 `
 
 

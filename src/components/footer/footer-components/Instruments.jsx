@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import * as Styled from './footer-styled/instruments'
+import * as Styled from '../footer-styled/instruments'
 
 const Instruments = () => {
     return (

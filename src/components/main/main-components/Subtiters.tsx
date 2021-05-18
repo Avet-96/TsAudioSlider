@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Styled from './main-styles/subtiters'
+import * as Styled from '../main-styles/subtiters'
 import MusickPath from "./MusicPath";
 
 const Subtiters = () => {

@@ -1,13 +1,15 @@
 import React from "react";
 import {FooterBlock} from "./footer-styled/footer";
-import Instruments from "./Instruments";
-import PlayerSlider from "./PlayerSlider";
+import Instruments from "./footer-components/Instruments";
+import PlayerSlider from "./footer-components/PlayerSlider";
+import MusicCut from "./footer-components/MusicCut";
 
 const Footer = () => {
     return (
         <FooterBlock>
             <Instruments/>
             <PlayerSlider/>
+            <MusicCut/>
         </FooterBlock>
     )
 }
