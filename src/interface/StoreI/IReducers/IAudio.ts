@@ -33,8 +33,9 @@ export interface ISetNewCut {
     start: number,
     end: number,
 }
+
 export interface ISetCutPos {
-    id?:number,
+    id?: number,
     start: number,
     end: number,
     styles?: {
@@ -43,3 +44,7 @@ export interface ISetCutPos {
     }
 }
 
+export interface IChangePosition {
+    left: number,
+    id: number
+}

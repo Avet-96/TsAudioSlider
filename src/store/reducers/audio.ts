@@ -1,4 +1,10 @@
-import {AudioActionTYpe, ISetCut, ISetCutPositions, SET_NEW_CUT, SET_NEW_CUT_POSITIONS} from "../actions/audio";
+import {
+    ISetCut,
+    ISetCutPositions,
+    SET_NEW_CUT,
+    SET_NEW_CUT_POSITIONS,
+    CHANGE_CUT_POSITION, ICutPosition
+} from "../actions/audio";
 import IAudio from "../../interface/StoreI/IReducers/IAudio";
 import score from "../../hooks/score";
 
@@ -14,7 +20,8 @@ export const initialState: IAudio = {
 };
 
 
-export default function reducers(state = initialState, action: ISetCut | AudioActionTYpe | ISetCutPositions) {
+export default function
+    reducers(state = initialState, action: ISetCut | ISetCutPositions | ICutPosition) {
     switch (action.type) {
         case SET_NEW_CUT: {
             // change IAudio types
@@ -52,6 +59,10 @@ export default function reducers(state = initialState, action: ISetCut | AudioAc
                     cordData]
             }
         }
+        case CHANGE_CUT_POSITION : {
+            return {...state, cutBlock: action.payload}
+        }
+
         default : {
             return state
         }

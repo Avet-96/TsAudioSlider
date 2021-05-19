@@ -1,6 +1,5 @@
 import React from "react";
 import {SliderBlock, style} from '../footer-styled/slider'
-import MusicCut from "./MusicCut";
 
 const PlayerSlider = () => {
 

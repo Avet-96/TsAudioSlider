@@ -6,7 +6,6 @@ const InsBlock = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 2% 4%;
-  border: 1px solid #7683A7;
 `
 const ZoomButtons = styled.div`
   display: flex;

@@ -8,14 +8,15 @@ const SubtitMain = styled.div`
   background: #F7FAFF;
   color: #131313c2;
   width: 30%;
+  padding: 25px;
 `
 const STitle = styled.h2`
   font-size: 22px;
   text-align: center;
 `
 const Btn = styled.button`
-  width: 170px;
-  height: 45px;
+  width: 140px;
+  height: 35px;
   font-family: 'Roboto', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
@@ -24,7 +25,7 @@ const Btn = styled.button`
   background-color: #fff;
   border: none;
   border-radius: 45px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
