@@ -58,7 +58,8 @@ const Play = styled.span`
 `
 const TimerBlock = styled.span`
   font-size: 18px;
-  text-align: center`
+  text-align: center;
+`
 
 export {
     InsBlock,

@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import  {useMemo} from "react";
 
 type IorData = {
     id: number,
@@ -11,18 +11,20 @@ type IorData = {
 }
 type IChangeData = { id: number, left: number }
 
-export const useFlowChangeCut = (origData: IorData[] | [], changesData: IChangeData) => {
-    const updData = useMemo(() => origData, [origData])
+export const useFlowChangeCut = (originalData: IorData[] | [], changedData: IChangeData) => {
+    const updatedData = useMemo(() => originalData, [originalData])
 
-    return [...updData.map((items: IorData) => {
-        if (items.id === changesData.id) {
-            console.log()
-            items.styles = {
-                width: items.styles.width,
-                left: `${changesData.left}px`
+    return updatedData.map((item: IorData) => {
+        if (item.id === changedData.id) {
+            return {
+                ...item,
+                styles: {
+                    width: item.styles.width,
+                    left: `${changedData.left}px`
+                }
             }
         }
-        return items
-    })]
+        return item
+    })
 }
 

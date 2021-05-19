@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100%;
   margin-right: auto;
-  margin-left: auto
+  margin-left: auto;
 `
 const LogoBlock = styled.div`
   width: 50%;
