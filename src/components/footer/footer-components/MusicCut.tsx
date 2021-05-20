@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC} from 'react'
 import * as Styled from '../footer-styled/musicCut'
 import CutBlock from "./slider-components/CutBlock";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,16 +14,14 @@ const chunkStartEnd = {
 const MusicCut: FC = () => {
     const dispatch = useDispatch()
     const cuts = useSelector((state: any) => state.audio.cutBlock)
-    const [xCord, setXCord] = useState(NaN)
-
     const addNewCut = () => {
         dispatch(setNewCut(chunkStartEnd))
         dispatch(setNewCutPosition(chunkStartEnd))
     }
 
     return (
-        <Styled.SliderCut onMouseOver={(e) => setXCord(e.clientX)}>
-            {cuts && cuts.map((cut: ISetCutPos) => <CutBlock key={cut.id} posX={xCord}/>)}
+        <Styled.SliderCut>
+            {cuts && cuts.map((cut: ISetCutPos) => <CutBlock cutList={cut} key={cut.id}/>)}
             <Styled.Add onClick={addNewCut}>
                 + add subtitle
             </Styled.Add>

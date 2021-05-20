@@ -1,12 +1,13 @@
 import {
-    ISetCut,
-    ISetCutPositions,
     SET_NEW_CUT,
     SET_NEW_CUT_POSITIONS,
-    CHANGE_CUT_POSITION, ICutPosition
+    CHANGE_CUT_POSITION,
 } from "../actions/audio";
 import IAudio from "../../interface/StoreI/IReducers/IAudio";
 import score from "../../hooks/score";
+import {ICutPosition, ISetCut, ISetCutPositions} from "../../interface/StoreI/IActions/IAudioActions";
+import produce from "immer";
+import {LogoBlock} from "../../components/header/header-styles/header";
 
 
 export const initialState: IAudio = {
@@ -19,12 +20,9 @@ export const initialState: IAudio = {
     cutBlock: []
 };
 
-
-export default function
-    reducers(state = initialState, action: ISetCut | ISetCutPositions | ICutPosition) {
+const reducers = produce((draft, action: ISetCut | ISetCutPositions | ICutPosition) => {
     switch (action.type) {
-        case SET_NEW_CUT: {
-            // change IAudio types
+        case SET_NEW_CUT : {
             const addData = {
                 id: Math.floor(Math.random() * 10000),
                 ...action.payload,
@@ -38,34 +36,27 @@ export default function
                     styles: ["bold", "italic", "underlined"],
                 },
             }
-            return {
-                ...state, audioChunks: [
-                    // @ts-ignore
-                    ...state.audioChunks,
-                    addData]
-            }
+            draft.audioChunks?.push(addData)
         }
+            break
         case SET_NEW_CUT_POSITIONS: {
-            const [cordData, num] = score(state.cutBlock, action.payload)
+            const [cordData, num] = score(draft.cutBlock, action.payload)
             if (num >= 101) {
-                console.log(num)
-                return state
+                break
             }
-            return {
-                ...state,
-                cutBlock: [
-                    // @ts-ignore
-                    ...state.cutBlock,
-                    cordData]
-            }
+            draft.cutBlock = [...draft.cutBlock || [], cordData]
         }
-        case CHANGE_CUT_POSITION : {
-            return {...state, cutBlock: action.payload}
-        }
+            break
 
-        default : {
-            return state
-        }
+        case CHANGE_CUT_POSITION :
+            // @ts-ignore
+            draft.cutBlock = draft.cutBlock?.map(
+                cut => action.payload.id === cut.id ?
+                    action.payload : cut
+            )
 
+            break
     }
-}
+}, initialState)
+export default reducers
+

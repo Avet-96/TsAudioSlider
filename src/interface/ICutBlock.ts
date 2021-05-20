@@ -1,5 +1,5 @@
 export default interface ICutBlock {
-    params?: {
+    cutList?: {
         id: number,
         start: number,
         end: number,
@@ -7,6 +7,5 @@ export default interface ICutBlock {
             width: string,
             left: string
         }
-    }[]
-    posX: number,
+    } | {}
 }

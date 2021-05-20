@@ -39,12 +39,8 @@ export interface ISetCutPos {
     start: number,
     end: number,
     styles?: {
-        width: string,
-        left: string
+        width: string | undefined,
+        left: string | undefined
     }
 }
 
-export interface IChangePosition {
-    left: number,
-    id: number
-}

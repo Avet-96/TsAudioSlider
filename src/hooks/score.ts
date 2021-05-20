@@ -15,7 +15,6 @@ const score = (data: any, payloadData: any) => {
     }
     widList.push(styles)
     widList.forEach((wi: any) => {
-        console.log(wi)
         num += +wi.width.split('%')[0]
     })
 
