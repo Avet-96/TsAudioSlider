@@ -4,7 +4,7 @@ export default interface ICutBlock {
         start: number,
         end: number,
         styles: {
-            width: string,
+            width: string | undefined,
             left: string
         }
     } | {}

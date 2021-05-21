@@ -28,19 +28,17 @@ export default interface IAudio {
         }
     }[]
 }
-
 export interface ISetNewCut {
     start: number,
     end: number,
 }
-
 export interface ISetCutPos {
     id?: number,
-    start: number,
-    end: number,
+    start?: number,
+    end?: number,
     styles?: {
-        width: string | undefined,
-        left: string | undefined
+        width?: string ,
+        left?: string
     }
 }
 
