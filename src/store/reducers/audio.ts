@@ -1,60 +1,38 @@
-import {
-    SET_NEW_CUT,
-    SET_NEW_CUT_POSITIONS,
-    CHANGE_CUT_POSITION,
-} from "../actions/audio";
-import IAudio from "../../interface/StoreI/IReducers/IAudio";
-import score from "../../hooks/score";
-import {ICutPosition, ISetCut, ISetCutPositions} from "../../interface/StoreI/IActions/IAudioActions";
+import {SET_CUT_MODIFIED_PARAMETERS, SET_NEW_MUSIC_CUT,} from "../actions/audio";
+import IAudioInitialState from "../../interface/StoreI/IReducers/IAudioInitialState";
+import {AudioActionsType} from "../../interface/StoreI/IActions/IAudioActions";
 import produce from "immer";
-import {LogoBlock} from "../../components/header/header-styles/header";
+import {addNewMusicChunk, idGenerator, addNewMusicCut} from "../../helpers";
 
 
-export const initialState: IAudio = {
+export const initialState: IAudioInitialState = {
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     imageUrl: "inch vor nkar",
     canvasHeight: 1080,
     canvasWidth: 1920,
     duration: 186,
     audioChunks: [],
-    cutBlock: []
+    audioCuts: []
 };
 
-const reducers = produce((draft, action: ISetCut | ISetCutPositions | ICutPosition) => {
+const reducers = produce((draft, action: AudioActionsType) => {
     switch (action.type) {
-        case SET_NEW_CUT : {
-            const addData = {
-                id: Math.floor(Math.random() * 10000),
-                ...action.payload,
-                textParams: {
-                    text: "Lorem Ipsum",
-                    fontName: "Montserrat",
-                    color: "red",
-                    size: "16px",
-                    coordinates: [120, 190],
-                    opacity: 1,
-                    styles: ["bold", "italic", "underlined"],
-                },
-            }
-            draft.audioChunks?.push(addData)
+        case SET_NEW_MUSIC_CUT : {
+            const {audioChunks, audioCuts} = draft, id = idGenerator()
+            const newChunk = addNewMusicChunk(id, action.payload)
+            const newCut = addNewMusicCut(id, action.payload, audioCuts.length, audioCuts)
+            audioChunks.push(newChunk)
+            audioCuts.push(newCut)
         }
             break
-        case SET_NEW_CUT_POSITIONS: {
-            const [cordData, num] = score(draft.cutBlock, action.payload)
-            if (num >= 101) {
-                break
-            }
-            draft.cutBlock = [...draft.cutBlock || [], cordData]
+        case SET_CUT_MODIFIED_PARAMETERS: {
+            const {id, styles} = action.payload
+            draft.audioCuts.forEach((cut) => {
+                if (cut.id === id) {
+                    cut.styles = styles
+                }
+            })
         }
-            break
-
-        case CHANGE_CUT_POSITION :
-            // @ts-ignore
-            draft.cutBlock = draft.cutBlock?.map(
-                cut => action.payload.id === cut.id ?
-                    action.payload : cut
-            )
-
             break
     }
 }, initialState)

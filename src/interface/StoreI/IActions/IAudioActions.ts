@@ -1,22 +1,26 @@
-import {ISetCutPos, ISetNewCut} from "../IReducers/IAudio";
-import {CHANGE_CUT_POSITION, CHANGE_CUT_WIDTH, SET_NEW_CUT, SET_NEW_CUT_POSITIONS} from "../../../store/actions/audio";
+import {SET_CUT_MODIFIED_PARAMETERS, SET_NEW_MUSIC_CUT} from "../../../store/actions/audio";
 
-export interface ISetCut {
-    type: typeof SET_NEW_CUT,
-    payload: ISetNewCut
+export type ISetNewCutData = {
+    start: number,
+    end: number
+}
+export type ISetModifiedCud = {
+    id: number,
+    styles: {
+        width: string,
+        left: string
+    }
 }
 
-export interface ISetCutPositions {
-    type: typeof SET_NEW_CUT_POSITIONS,
-    payload: ISetCutPos
+export interface ISetNewMusicCut {
+    type: typeof SET_NEW_MUSIC_CUT,
+    payload: ISetNewCutData
 }
 
-export interface ICutPosition {
-    type: typeof CHANGE_CUT_POSITION,
-    payload: ISetCutPos
+export interface ISetModifiedParams {
+    type: typeof SET_CUT_MODIFIED_PARAMETERS,
+    payload: ISetModifiedCud
 }
 
-export interface ICutWidth {
-    type: typeof CHANGE_CUT_WIDTH,
-    payload: ISetCutPos
-}
+export type AudioActionsType = ISetNewMusicCut | ISetModifiedParams
+

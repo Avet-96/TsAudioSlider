@@ -1,10 +1,10 @@
-export default interface IAudio {
+export default interface IAudioInitialState {
     audioUrl: string,
     imageUrl: string,
     canvasHeight: number,
     canvasWidth: number,
     duration: number,
-    audioChunks?: {
+    audioChunks: Array<{
         id: number,
         start: number,
         end: number,
@@ -17,8 +17,8 @@ export default interface IAudio {
             opacity: number,
             styles: string[]
         }
-    }[]
-    cutBlock?: {
+    }>,
+    audioCuts: Array<{
         id: number,
         start: number,
         end: number,
@@ -26,19 +26,8 @@ export default interface IAudio {
             width: string,
             left: string
         }
-    }[]
+    }>
 }
-export interface ISetNewCut {
-    start: number,
-    end: number,
-}
-export interface ISetCutPos {
-    id?: number,
-    start?: number,
-    end?: number,
-    styles?: {
-        width?: string ,
-        left?: string
-    }
-}
+
+
 
