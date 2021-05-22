@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import ICutBlock from "../../../../interface/ICutBlock";
 import {useMousePosition} from "../../../../hooks/useMousPosition";
 import {widthLeftToPx} from "../../../../helpers";
-import * as Styled from './audioCutBLock'
 import {setCutModifiedParameters} from "../../../../store/actions/audio";
 import {useDispatch} from "react-redux";
+import ICutBlock from "../../../../interface/ICutBlock";
+import * as Styled from './audioCutBLock'
+
 
 const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
     const dispatch = useDispatch()

@@ -4,7 +4,7 @@ const widthLeftToPx = (params: { width: number }) => {
 
     const _width = (width * 100 / fullWidth)
     let leftRightConfBlocks = 30 * 100 / fullWidth
-
+    console.log(width, _width)
     if (_width < 60) {
         leftRightConfBlocks = leftRightConfBlocks / 2
     }
