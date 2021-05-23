@@ -10,5 +10,5 @@ export default interface ICutBlock {
     }
 }
 
-export type ChangeParamType = 'changeLeft' |'changeWidthRight' |'changeWidthLeft'
+export type ChangeParamType = 'changeLeft' | 'changeWidthRight' | 'changeWidthLeft'
 

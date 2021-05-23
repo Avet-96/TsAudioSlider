@@ -1,8 +1,8 @@
-import {SET_CUT_MODIFIED_PARAMETERS, SET_NEW_MUSIC_CUT,} from "../actions/audio";
+import {SAVE_STATIC_LEFT_PARAM, SET_CUT_MODIFIED_PARAMETERS, SET_NEW_MUSIC_CUT,} from "../actions/audio";
 import IAudioInitialState from "../../interface/StoreI/IReducers/IAudioInitialState";
 import {AudioActionsType} from "../../interface/StoreI/IActions/IAudioActions";
 import produce from "immer";
-import {addNewMusicChunk, idGenerator, addNewMusicCut} from "../../helpers";
+import {addNewMusicChunk, addNewMusicCut, idGenerator} from "../../helpers";
 
 
 export const initialState: IAudioInitialState = {
@@ -12,7 +12,8 @@ export const initialState: IAudioInitialState = {
     canvasWidth: 1920,
     duration: 186,
     audioChunks: [],
-    audioCuts: []
+    audioCuts: [],
+    staticLeft: 0
 };
 
 const reducers = produce((draft, action: AudioActionsType) => {
@@ -34,6 +35,9 @@ const reducers = produce((draft, action: AudioActionsType) => {
             })
         }
             break
+        case SAVE_STATIC_LEFT_PARAM : {
+            draft.staticLeft = action.payload.left
+        }
     }
 }, initialState)
 export default reducers

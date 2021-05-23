@@ -26,7 +26,8 @@ export default interface IAudioInitialState {
             width: string,
             left: string
         }
-    }>
+    }>,
+    staticLeft: number
 }
 
 

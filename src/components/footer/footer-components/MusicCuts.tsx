@@ -15,6 +15,7 @@ const apiGetData = {
 const MusicCuts: FC = () => {
     const dispatch = useDispatch()
     const audioCuts = useSelector((state: IMusicCutType) => state.audio.audioCuts)
+
     const addNewMusicCut = () => {
         dispatch(setNewCut(apiGetData))
     }

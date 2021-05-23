@@ -1,20 +1,20 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import * as Styled from './audioCutBLock'
 
 import {useMousePosition} from "../../../../hooks/useMousPosition";
 import {widthToPercent, leftToPercent} from "../../../../helpers";
-import {setCutModifiedParameters} from "../../../../store/actions/audio";
+import {saveStaticLeftParams, setCutModifiedParameters} from "../../../../store/actions/audio";
 import ICutBlock, {ChangeParamType} from "../../../../interface/ICutBlock";
 
 
 const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
+    const staticLeft = useSelector((state: { audio: { staticLeft: number } }) => state.audio.staticLeft)
     const [isChangeCutWidth, setIsChangeCutWidth] = useState(false)
     const [widthHeight, setWidthHeight] = useState({...styles})
     const [lRW, setLRW] = useState('')
     const mouseXPosition = useMousePosition()
     const dispatch = useDispatch()
-
 
     const changeWidth = useCallback(() => {
             const {width} = widthToPercent({width: mouseXPosition, left: styles.left})
@@ -22,13 +22,12 @@ const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
         },
         [mouseXPosition, styles.left],
     );
-    const changeAudioCutPosition = useCallback(
-        () => {
-            const {left} = leftToPercent({left: styles.left, mousePosition: mouseXPosition})
+    const changeAudioCutPosition = useCallback(() => {
+            const {left} = leftToPercent({left: styles.left, mousePosition: mouseXPosition, staticLeft})
             setWidthHeight({width: styles.width, left: left})
 
         },
-        [mouseXPosition, styles.left, styles.width],
+        [mouseXPosition, styles.left, styles.width, staticLeft],
     );
 
 
@@ -41,10 +40,12 @@ const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
     const onChangeMusicCutWidth = (changeParam: ChangeParamType) => {
         setIsChangeCutWidth(true)
         setLRW(changeParam)
+        if (changeParam === 'changeLeft') dispatch(saveStaticLeftParams({left: mouseXPosition}))
 
     }
     const ofChangeMusicCutWidth = () => {
         setIsChangeCutWidth(false)
+        console.log(widthHeight)
         dispatch(setCutModifiedParameters({
             id, styles: widthHeight
         }))
