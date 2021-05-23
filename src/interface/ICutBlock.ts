@@ -9,3 +9,6 @@ export default interface ICutBlock {
         }
     }
 }
+
+export type ChangeParamType = 'changeLeft' |'changeWidthRight' |'changeWidthLeft'
+

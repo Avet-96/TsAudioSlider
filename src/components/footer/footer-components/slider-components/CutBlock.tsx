@@ -1,34 +1,47 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {useMousePosition} from "../../../../hooks/useMousPosition";
-import {widthLeftToPx} from "../../../../helpers";
-import {setCutModifiedParameters} from "../../../../store/actions/audio";
 import {useDispatch} from "react-redux";
-import ICutBlock from "../../../../interface/ICutBlock";
 import * as Styled from './audioCutBLock'
+
+import {useMousePosition} from "../../../../hooks/useMousPosition";
+import {widthToPercent, leftToPercent} from "../../../../helpers";
+import {setCutModifiedParameters} from "../../../../store/actions/audio";
+import ICutBlock, {ChangeParamType} from "../../../../interface/ICutBlock";
 
 
 const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
-    const dispatch = useDispatch()
     const [isChangeCutWidth, setIsChangeCutWidth] = useState(false)
     const [widthHeight, setWidthHeight] = useState({...styles})
+    const [lRW, setLRW] = useState('')
     const mouseXPosition = useMousePosition()
+    const dispatch = useDispatch()
+
+
     const changeWidth = useCallback(() => {
-            const {width} = widthLeftToPx({width: mouseXPosition})
+            const {width} = widthToPercent({width: mouseXPosition, left: styles.left})
             setWidthHeight({width, left: styles.left})
         },
         [mouseXPosition, styles.left],
+    );
+    const changeAudioCutPosition = useCallback(
+        () => {
+            const {left} = leftToPercent({left: styles.left, mousePosition: mouseXPosition})
+            setWidthHeight({width: styles.width, left: left})
+
+        },
+        [mouseXPosition, styles.left, styles.width],
     );
 
 
     useEffect(() => {
         if (isChangeCutWidth) {
-            changeWidth()
+            lRW === 'changeWidthRight' ? changeWidth() : changeAudioCutPosition()
         }
+    }, [changeAudioCutPosition, changeWidth, isChangeCutWidth, lRW]);
 
-    }, [changeWidth, isChangeCutWidth]);
-
-    const onChangeMusicCutWidth = () => {
+    const onChangeMusicCutWidth = (changeParam: ChangeParamType) => {
         setIsChangeCutWidth(true)
+        setLRW(changeParam)
+
     }
     const ofChangeMusicCutWidth = () => {
         setIsChangeCutWidth(false)
@@ -43,9 +56,12 @@ const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
             <Styled.AudioLeftRightWidthConfig>
                 {'<'}
             </Styled.AudioLeftRightWidthConfig>
-            <Styled.AudioCutCentral/>
+            <Styled.AudioCutCentral
+                onMouseDown={() => onChangeMusicCutWidth('changeLeft')}
+                onMouseUp={ofChangeMusicCutWidth}
+            />
             <Styled.AudioLeftRightWidthConfig
-                onMouseDown={onChangeMusicCutWidth}
+                onMouseDown={() => onChangeMusicCutWidth('changeWidthRight')}
                 onMouseUp={ofChangeMusicCutWidth}
             >
                 {'>'}
