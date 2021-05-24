@@ -1,5 +1,6 @@
-const leftToPercent = (params: { left: string, mousePosition: number, staticLeft: number }) => {
-    const {staticLeft, mousePosition, left} = params
+import ILeftToPerFunc, {ILeftToPercent} from "../interface/Helpers/ILeftToProcent";
+
+const leftToPercent = ({left, mousePosition, staticLeft}: ILeftToPercent): ILeftToPerFunc => {
     const fullWidth = window.innerWidth
     const _left = parseInt(left) * fullWidth / 100
     const leftChange = (_left + mousePosition - staticLeft) * 100 / fullWidth

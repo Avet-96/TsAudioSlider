@@ -1,10 +1,6 @@
-type IWidthToPercentType = {
-    width: string,
-    left: string,
-    mouseXPosition: number
-    staticLeft: number
-}
-const widthToPercent = ({width, left, staticLeft, mouseXPosition}: IWidthToPercentType) => {
+import IWidthToPerFunc, {IWidthToPercentType} from "../interface/Helpers/IWidtToPrecent";
+
+const widthToPercent = ({width, left, staticLeft, mouseXPosition}: IWidthToPercentType): IWidthToPerFunc => {
     const fullWidth = window.innerWidth
     const _width = (parseInt(width) + parseInt(left)) * fullWidth / 100
     const changeWidth = (_width + staticLeft - mouseXPosition)

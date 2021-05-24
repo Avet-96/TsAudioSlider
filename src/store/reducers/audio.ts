@@ -20,8 +20,13 @@ const reducers = produce((draft, action: AudioActionsType) => {
     switch (action.type) {
         case SET_NEW_MUSIC_CUT : {
             const {audioChunks, audioCuts} = draft, id = idGenerator()
-            const newChunk = addNewMusicChunk(id, action.payload)
-            const newCut = addNewMusicCut(id, action.payload, audioCuts.length, audioCuts)
+            const newChunk = addNewMusicChunk({id, newChunkParams: action.payload})
+            const newCut = addNewMusicCut({
+                id,
+                newCutParams: action.payload,
+                length: audioCuts.length,
+                cutList: audioCuts
+            })
             audioChunks.push(newChunk)
             audioCuts.push(newCut)
         }
