@@ -17,7 +17,10 @@ const setCutModifiedParameters = (modifiedParams: ISetModifiedCud): ISetModified
     type: SET_CUT_MODIFIED_PARAMETERS,
     payload: modifiedParams
 })
-const saveStaticLeftParams = (left: IStaticLeft): ISaveStaticLeft => ({type: SAVE_STATIC_LEFT_PARAM, payload: left})
+const saveStaticLeftParams = (mouseXPosition: IStaticLeft): ISaveStaticLeft => ({
+    type: SAVE_STATIC_LEFT_PARAM,
+    payload: mouseXPosition
+})
 
 export {
     SET_NEW_MUSIC_CUT,

@@ -1,14 +1,15 @@
-const widthToPercent = (params: { width: number, left: string }) => {
-    const {width, left} = params
+type IWidthToPercentType = {
+    width: string,
+    left: string,
+    mouseXPosition: number
+    staticLeft: number
+}
+const widthToPercent = ({width, left, staticLeft, mouseXPosition}: IWidthToPercentType) => {
     const fullWidth = window.innerWidth
-    const _left = parseInt(left) * fullWidth / 100
-    const _width = ((width - _left) * 100 / fullWidth)
+    const _width = (parseInt(width) - parseInt(left)) * fullWidth / 100
+    const changeWidth = (_width + mouseXPosition - staticLeft)
+    const finalResult = (changeWidth * 100 / fullWidth)
 
-    const leftRightConfBlocks = _width < 60
-        ? _width : _width < 30
-            ? _width + 10
-            : _width + 2
-
-    return {width: `${leftRightConfBlocks}%`}
+    return {width: `${finalResult}%`}
 }
 export default widthToPercent

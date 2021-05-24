@@ -36,7 +36,7 @@ const reducers = produce((draft, action: AudioActionsType) => {
         }
             break
         case SAVE_STATIC_LEFT_PARAM : {
-            draft.staticLeft = action.payload.left
+            draft.staticLeft = action.payload.mouseXPosition
         }
     }
 }, initialState)

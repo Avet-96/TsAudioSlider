@@ -12,7 +12,7 @@ export type ISetModifiedCud = {
     }
 }
 export type IStaticLeft = {
-    left: number
+    mouseXPosition: number
 }
 
 export interface ISetNewMusicCut {

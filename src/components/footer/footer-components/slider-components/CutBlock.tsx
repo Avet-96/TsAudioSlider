@@ -17,17 +17,19 @@ const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
     const dispatch = useDispatch()
 
     const changeWidth = useCallback(() => {
-            const {width} = widthToPercent({width: mouseXPosition, left: styles.left})
+            const {width} = widthToPercent({
+                width: styles.width, mouseXPosition, left: styles.left, staticLeft
+            })
             setWidthHeight({width, left: styles.left})
         },
-        [mouseXPosition, styles.left],
+        [mouseXPosition, styles.left, styles.width, staticLeft]
     );
     const changeAudioCutPosition = useCallback(() => {
             const {left} = leftToPercent({left: styles.left, mousePosition: mouseXPosition, staticLeft})
             setWidthHeight({width: styles.width, left: left})
 
         },
-        [mouseXPosition, styles.left, styles.width, staticLeft],
+        [mouseXPosition, styles.left, styles.width, staticLeft]
     );
 
 
@@ -40,7 +42,7 @@ const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
     const onChangeMusicCutWidth = (changeParam: ChangeParamType) => {
         setIsChangeCutWidth(true)
         setLRW(changeParam)
-        if (changeParam === 'changeLeft') dispatch(saveStaticLeftParams({left: mouseXPosition}))
+        dispatch(saveStaticLeftParams({mouseXPosition}))
 
     }
     const ofChangeMusicCutWidth = () => {
