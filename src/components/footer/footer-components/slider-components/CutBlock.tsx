@@ -1,11 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import {useMousePosition} from "hooks/useMousPosition";
+import {widthToPercent, leftToPercent} from "helpers";
+import {saveStaticLeftParams, setCutModifiedParameters} from "store/actions/audio";
+import ICutBlock, {ChangeParamType} from "interface/ICutBlock";
 import * as Styled from './audioCutBLock'
-
-import {useMousePosition} from "../../../../hooks/useMousPosition";
-import {widthToPercent, leftToPercent} from "../../../../helpers";
-import {saveStaticLeftParams, setCutModifiedParameters} from "../../../../store/actions/audio";
-import ICutBlock, {ChangeParamType} from "../../../../interface/ICutBlock";
 
 
 const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
@@ -39,13 +38,12 @@ const CutBlock: React.FC<ICutBlock> = ({cut: {styles, id}}) => {
         }
     }, [changeAudioCutPosition, changeWidth, isChangeCutWidth, lRW]);
 
-    const onChangeMusicCutWidth = (changeParam: ChangeParamType) => {
+    const onChangeMusicCutWidth = (changeParam: ChangeParamType): void => {
         setIsChangeCutWidth(true)
         setLRW(changeParam)
         dispatch(saveStaticLeftParams({mouseXPosition}))
-
     }
-    const ofChangeMusicCutWidth = () => {
+    const ofChangeMusicCutWidth = (): void => {
         setIsChangeCutWidth(false)
         console.log(widthHeight)
         dispatch(setCutModifiedParameters({

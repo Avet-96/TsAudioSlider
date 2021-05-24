@@ -1,6 +1,6 @@
 import {SAVE_STATIC_LEFT_PARAM, SET_CUT_MODIFIED_PARAMETERS, SET_NEW_MUSIC_CUT,} from "../actions/audio";
-import IAudioInitialState from "../../interface/StoreI/IReducers/IAudioInitialState";
-import {AudioActionsType} from "../../interface/StoreI/IActions/IAudioActions";
+import IAudioInitialState from "interface/StoreI/IReducers/IAudioInitialState";
+import {AudioActionsType} from "interface/StoreI/IActions/IAudioActions";
 import produce from "immer";
 import {addNewMusicChunk, addNewMusicCut, idGenerator} from "../../helpers";
 

@@ -2,8 +2,8 @@ import React, {FC} from 'react'
 import * as Styled from '../footer-styled/musicCut'
 import CutBlock from "./slider-components/CutBlock";
 import {useDispatch, useSelector} from "react-redux";
-import {setNewCut} from "../../../store/actions/audio";
-import {IMusicCutType} from "../../../interface/IMusicCuts";
+import {setNewCut} from "store/actions/audio";
+import {IMusicCutType} from "interface/IMusicCuts";
 
 
 const apiGetData = {
