@@ -1,19 +1,5 @@
-type IAddNewMusicCut = {
-    id: number,
-    start: number,
-    end: number,
-    textParams: {
-        text: string,
-        fontName: string,
-        color: string,
-        size: string,
-        coordinates: Array<number>,
-        opacity: number,
-        styles: Array<string>
-    }
-}
-
-const addNewMusicChunk = (id: number, newChunkParams: { start: number, end: number }): IAddNewMusicCut => {
+import IAddNewMusicCut, {IAddMusicParams} from "../interface/Helpers/IAddNewMusicChunk";
+const addNewMusicChunk = ({id, newChunkParams}: IAddMusicParams): IAddNewMusicCut => {
     const defaultObject = {
         text: "Lorem Ipsum",
         fontName: "Montserrat",

@@ -1,21 +1,11 @@
-type IAddNewMusicCut = {
-    id: number,
-    start: number,
-    end: number,
-    styles: {
-        left: string,
-        width: string
-    }
-}
+import IAddNEwMusicFunc, {IAddNewMusicCut} from "../interface/Helpers/IAddNewMusicCut";
+
 const foldParams = (w: string, l: string) => {
     const _left = parseInt(w) + parseInt(l)
-    const _width = 100 - parseInt(w) -3
+    const _width = 100 - parseInt(w) - 3
     return [_width, _left]
 }
-const addNewMusicCut = (
-    id: number,
-    newCutParams: { start: number, end: number },
-    length: number, cutList: Array<IAddNewMusicCut>): IAddNewMusicCut => {
+const addNewMusicCut = ({id, newCutParams, length, cutList}: IAddNewMusicCut): IAddNEwMusicFunc => {
     const audioCut = {
         id,
         ...newCutParams,
